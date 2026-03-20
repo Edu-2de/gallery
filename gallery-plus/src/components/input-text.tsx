@@ -25,6 +25,25 @@ export const inputTextWrapperVariants = tv({
     },
 });
 
+export const inputTextVariants = tv({
+    base: `
+        bg-transparent outline-none placeholder:text-placeholder 
+        flex-1 text-accent-paragraph
+    `,
+});
+
+export const inputTextIconVariants = tv({
+    base: `fill-placeholder`,
+    variants: {
+        size: {
+            md: "w-6 h-6",
+        },
+    },
+    defaultVariants: {
+        size: "md",
+    },
+});
+
 interface InputTextProps
     extends
         VariantProps<typeof inputTextWrapperVariants>,
@@ -39,12 +58,18 @@ export default function InputText({
     className,
     icon,
     error,
+    ...props
 }: InputTextProps) {
     return (
         <div className={inputTextContainerVariants({ className })}>
             <div className={inputTextWrapperVariants({ size, disable })}>
-                {icon && <Icon svg={icon} />}
-                <input type="text" />
+                {icon && <Icon svg={icon} className={inputTextIconVariants()} />}
+                <input
+                    className={inputTextVariants()}
+                    type="text"
+                    disabled={disable as boolean}
+                    {...props}
+                />
             </div>
             {error && (
                 <Text variant="label-small" className="text-accent-red">
