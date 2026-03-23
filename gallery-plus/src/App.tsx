@@ -41,7 +41,7 @@ export default function App() {
 
             <div>
                 <Alert>
-                    Tamanho máximo: 50MB
+                    Taman máximo: 50MB
                     <br />
                     Você pode selecionar arquivos em PNG, JPG, JPEG ou WEBP
                 </Alert>
