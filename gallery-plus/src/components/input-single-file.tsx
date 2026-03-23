@@ -67,7 +67,7 @@ export default function InputSingleFile({
         () => ({
             fileExtension:
                 formFile?.name?.split(".")?.pop()?.toLocaleLowerCase() || "",
-            fileSize: formFile.size || 0,
+            fileSize: formFile?.size || 0,
         }),
         [formFile],
     );
