@@ -9,16 +9,39 @@ export const inputSingleFileVariants = tv({
         flex flex-col justify-center items-center w-full
         border border-solid border-border-primary
         group-hover:border-border-active 
-         rounded-lg
+         rounded-lg gap-1 transition
     `,
+    variants: {
+        size: {
+            md: "px-5 py-6",
+        },
+    },
+    defaultVariants: {
+        size: "md",
+    },
+});
+
+export const inputSingleFileIconVariants = tv({
+    base: " fill-placeholder ",
+    variants: {
+        size: {
+            md: "w-8 h-8",
+        },
+    },
+    defaultVariants: {
+        size: "md",
+    },
 });
 
 interface InputSingleFileProps
     extends
         VariantProps<typeof inputSingleFileVariants>,
-        React.ComponentProps<"div"> {}
+        Omit<React.ComponentProps<"input">, "size"> {}
 
-export default function InputSingleFile({ ...props }: InputSingleFileProps) {
+export default function InputSingleFile({
+    size,
+    ...props
+}: InputSingleFileProps) {
     return (
         <div>
             <div className="w-full relative group cursor-pointer">
@@ -29,9 +52,12 @@ export default function InputSingleFile({ ...props }: InputSingleFileProps) {
                         opacity-0 cursor-pointer 
                     `}
                 />
-                <div className={inputSingleFileVariants()} {...props}>
-                    <Icon svg={FileIcon} className="w-8 h-8 fill-placeholder" />
-                    <Text variant="label-medium" className="text-placeholder">
+                <div className={inputSingleFileVariants({ size })} {...props}>
+                    <Icon
+                        svg={FileIcon}
+                        className={inputSingleFileIconVariants({ size })}
+                    />
+                    <Text variant="label-medium" className="text-placeholder text-center">
                         Arraste o arquivo aqui
                         <br />
                         ou clique para selecionar
