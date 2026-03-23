@@ -12,8 +12,7 @@ import InputSingleFile from "./components/input-single-file";
 import { useForm } from "react-hook-form";
 import ImageFilePreview from "./components/image-file-preview";
 import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
-import { DialogContent } from "./components/dialog";
-import Text from "./components/text";
+import { DialogContent, DialogHeader } from "./components/dialog";
 
 export default function App() {
     const form = useForm();
@@ -86,7 +85,9 @@ export default function App() {
                         <Button>Abrir Modal</Button>
                     </DialogTrigger>
                     <DialogContent>
-                        <Text>Teste Modal</Text>
+                        <DialogHeader>
+                            Teste Dialog
+                        </DialogHeader>
                     </DialogContent>
                 </Dialog>
             </div>

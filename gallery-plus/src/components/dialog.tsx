@@ -2,6 +2,10 @@ import React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import Card from "./card";
 import cn from "classnames";
+import Text from "./text";
+import ButtonIcon from "./button-icon";
+import XIcon from "../assets/icons/x.svg?react";
+import Divider from "./divider";
 
 export const Dialog = DialogPrimitive.Root;
 
@@ -62,5 +66,30 @@ export function DialogContent({
                 </Card>
             </DialogPrimitive.Content>
         </DialogPrimitive.Portal>
+    );
+}
+
+export function DialogHeader({
+    children,
+    className,
+    ...props
+}: React.ComponentProps<"div">) {
+    return (
+        <>
+            <header
+                className={cn("flex items-center justify-between", className)}
+                {...props}
+            >
+                <DialogPrimitive.Title>
+                    <Text variant="heading-medium" className="flex-1">
+                        {children}
+                    </Text>
+                </DialogPrimitive.Title>
+                <DialogClose asChild>
+                    <ButtonIcon icon={XIcon} variant="ghost" />
+                </DialogClose>
+            </header>
+            <Divider className="mt-1.5 mb-5" />
+        </>
     );
 }
