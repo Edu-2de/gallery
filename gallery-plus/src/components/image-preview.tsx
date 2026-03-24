@@ -1,31 +1,31 @@
 import type React from "react";
 import { tv } from "tailwind-variants";
 
-export const imageFilePreviewVarianst = tv({
+export const imagePreviewVarianst = tv({
     base: `
         rounded-lg overflow-hidden
     `,
 });
 
-export const imageFilePeviewImageVariants = tv({
+export const imagePeviewImageVariants = tv({
     base: `
         w-full h-full object-cover
     `,
 });
 
-interface ImageFilePreviewProps extends React.ComponentProps<"img"> {
+interface ImagePreviewProps extends React.ComponentProps<"img"> {
     imageClassName?: string;
 }
 
-export default function ImageFilePreview({
+export default function ImagePreview({
     className,
     imageClassName,
     ...props
-}: ImageFilePreviewProps) {
+}: ImagePreviewProps) {
     return (
-        <div className={imageFilePreviewVarianst({ className })}>
+        <div className={imagePreviewVarianst({ className })}>
             <img
-                className={imageFilePeviewImageVariants({
+                className={imagePeviewImageVariants({
                     className: imageClassName,
                 })}
                 {...props}
