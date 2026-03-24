@@ -1,4 +1,3 @@
-import Skeleton from "../../../components/skeleton";
 import type { Photo } from "../models/photo";
 import PhotoWidget from "./photo-widget";
 
@@ -16,9 +15,14 @@ export default function PhotosList({ photos, loading }: PhotosListProps) {
                     photos.map((photo) => (
                         <PhotoWidget key={photo.id} photo={photo} />
                     ))}
-                {loading && 
-                    <Skeleton />
-                }
+                {loading &&
+                    Array.from({ length: 10 }).map((_, index) => (
+                        <PhotoWidget
+                            key={`photo-loading-${index}`}
+                            photo={{} as Photo}
+                            loading
+                        />
+                    ))}
             </div>
         </div>
     );
