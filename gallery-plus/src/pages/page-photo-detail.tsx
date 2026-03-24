@@ -6,9 +6,7 @@ export default function PagePhotoDetail() {
 
     return (
         <>
-            <Text variant="heading-medium">Pagina de detalhe da foto</Text>
-            <hr/>
-            <Text variant="heading-medium">Id da foto: {id}</Text>
+          
         </>
     );
 }
