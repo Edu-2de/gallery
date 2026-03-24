@@ -4,7 +4,40 @@ import PhotosList from "../contexts/photos/components/photos-list";
 export default function PageHome() {
     return (
         <Container>
-            <PhotosList photos={[]} loading />
+            <PhotosList
+                photos={[
+                    {
+                        id: "1",
+                        title: "titulo1",
+                        imageId: "portrait-tower.png",
+                        albums: [
+                            { id: "1", title: "album1" },
+                            { id: "2", title: "album2" },
+                            { id: "3", title: "album3" },
+                        ],
+                    },
+                    {
+                        id: "2",
+                        title: "titulo2",
+                        imageId: "portrait-tower.png",
+                        albums: [
+                            { id: "1", title: "album1" },
+                            { id: "2", title: "album2" },
+                            { id: "3", title: "album3" },
+                        ],
+                    },
+                    {
+                        id: "3",
+                        title: "titulo3",
+                        imageId: "portrait-tower.png",
+                        albums: [
+                            { id: "1", title: "album1" },
+                            { id: "2", title: "album2" },
+                            { id: "3", title: "album3" },
+                        ],
+                    },
+                ]}
+            />
         </Container>
     );
 }

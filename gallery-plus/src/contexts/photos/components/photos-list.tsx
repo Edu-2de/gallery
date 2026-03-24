@@ -1,3 +1,4 @@
+import Skeleton from "../../../components/skeleton";
 import Text from "../../../components/text";
 import type { Photo } from "../models/photo";
 import PhotoWidget from "./photo-widget";
@@ -9,7 +10,19 @@ interface PhotosListProps {
 
 export default function PhotosList({ photos, loading }: PhotosListProps) {
     return (
-        <div>
+        <div className="space-y-6">
+            <Text
+                as="div"
+                variant="paragraph-large"
+                className="flex items-center justify-end text-accent-span"
+            >
+                Total:{" "}
+                {!loading ? (
+                    <div>{photos.length}</div>
+                ) : (
+                    <Skeleton className="h-6 w-6" />
+                )}
+            </Text>
             {!loading && photos?.length > 0 && (
                 <div className="grid grid-cols-5 gap-9">
                     {photos.map((photo) => (
@@ -30,7 +43,7 @@ export default function PhotosList({ photos, loading }: PhotosListProps) {
             )}
             {!loading && photos?.length === 0 && (
                 <div className="flex justify-center items-center h-full">
-                    <Text variant="paragraph-large" className="text-accent-red">
+                    <Text variant="paragraph-large">
                         Nenhuma foto encontrada!
                     </Text>
                 </div>
