@@ -5,6 +5,7 @@ import ArrowLeftIcon from "../../../assets/icons/chevron-left.svg?react";
 import ArrowRightIcon from "../../../assets/icons/chevron-right.svg?react";
 import Button from "../../../components/button";
 import { useNavigate } from "react-router";
+import cx from "classnames";
 
 interface PhotoNavigatorProps extends React.ComponentProps<"div"> {
     previousPhotoId?: string;
@@ -16,12 +17,13 @@ export default function PhotoNavigator({
     previousPhotoId,
     nextPhotoId,
     loading,
+    className,
     ...props
 }: PhotoNavigatorProps) {
     const navigate = useNavigate();
 
     return (
-        <div className="flex gap-2" {...props}>
+        <div className={cx("flex gap-2", className)} {...props}>
             {!loading ? (
                 <>
                     <ButtonIcon

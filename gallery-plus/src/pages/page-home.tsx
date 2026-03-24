@@ -12,6 +12,7 @@ export default function PageHome() {
                     { id: "3", title: "album3" },
                 ]}
                 className="mb-9"
+                
             />
 
             <PhotosList
