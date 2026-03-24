@@ -10,7 +10,7 @@ import SearchIcon from "../assets/icons/search.svg?react";
 import InputCheckbox from "../components/input-checkbox";
 import InputSingleFile from "../components/input-single-file";
 import { useForm } from "react-hook-form";
-import ImagePreview from "../components/image-file-preview";
+import ImagePreview from "../components/image-preview";
 import { Dialog, DialogClose, DialogTrigger } from "@radix-ui/react-dialog";
 import {
     DialogBody,
