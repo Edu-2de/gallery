@@ -9,23 +9,76 @@ import {
 } from "../../../components/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
 import Button from "../../../components/button";
+import InputText from "../../../components/input-text";
+import Alert from "../../../components/alert";
+import InputSingleFile from "../../../components/input-single-file";
+import ImagePreview from "../../../components/image-preview";
+import Text from "../../../components/text";
+import type { Album } from "../../albums/models/albums";
+import Skeleton from "../../../components/skeleton";
 
 interface PhotoNewDialogProps extends React.ComponentProps<typeof Dialog> {
     trigger: React.ReactNode;
+    loading?: boolean;
 }
 
 export default function PhotoNewDialog({ trigger }: PhotoNewDialogProps) {
+    const isLoadingAlbum = false;
+    const albums: Album[] = [
+        { id: "1", title: "album1" },
+        { id: "2", title: "album2" },
+        { id: "3", title: "album3" },
+    ];
+
     return (
         <Dialog>
             <DialogTrigger asChild>{trigger}</DialogTrigger>
             <DialogContent>
                 <DialogHeader>Adicionar Foto</DialogHeader>
-                <DialogBody></DialogBody>
+                <DialogBody className="flex flex-col gap-5">
+                    <InputText
+                        placeholder="Adicione um título"
+                        maxLength={255}
+                    />
+                    <Alert>
+                        Tamanho máximo: 50MB
+                        <br />
+                        Voce pode selcionar arquivo PNG, JPG ou JPEG
+                    </Alert>
+                    <InputSingleFile
+                        form={null}
+                        allowedExtensions={["png", "jpg", "jpeg"]}
+                        maxFileSizeInMB={50}
+                        replaceBy={<ImagePreview className="w-full h-56" />}
+                    />
+                    <div className="space-y-3 ">
+                        <Text variant="label-small">Selecionar albuns</Text>
+                        {!isLoadingAlbum &&
+                            albums.length > 0 &&
+                            albums.map((album) => (
+                                <Button
+                                    key={album.id}
+                                    variant="ghost"
+                                    size="sm"
+                                    className="truncate"
+                                >
+                                    {album.title}
+                                </Button>
+                            ))}
+                        {isLoadingAlbum &&
+                            Array.from({ length: 5 }).map((_, index) => (
+                                <Skeleton
+                                    className="h-7 w-20"
+                                    key={`album-loading-${index}`}
+                                />
+                            ))}
+                    </div>
+                </DialogBody>
                 <DialogFooter>
                     <DialogClose asChild>
-                        <Button variant="primary">Adicionar</Button>
                         <Button variant="secondary">Cancelar</Button>
                     </DialogClose>
+                    <Button variant="primary">Adicionar</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
