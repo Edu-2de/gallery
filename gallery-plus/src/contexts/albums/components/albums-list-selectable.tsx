@@ -31,7 +31,7 @@ export default function AlbumsListSelectable({
             albumsIds = [...photo.albums.map((album) => album.id), albumId];
         }
 
-        console.log(albumsIds);
+        console.log(`Esses sao os albums da foto: ${albumsIds}`);
     }
 
     return (
