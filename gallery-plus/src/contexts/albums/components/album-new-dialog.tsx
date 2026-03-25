@@ -18,7 +18,7 @@ interface AlbumNewDialogProps extends React.ComponentProps<typeof Dialog> {
     trigger: React.ReactNode;
 }
 
-export default function AlbumNewDialod({ trigger }: AlbumNewDialogProps) {
+export default function AlbumNewDialog({ trigger }: AlbumNewDialogProps) {
     const isLoadingPhotos = false;
     const photos: Photo[] = [];
 
