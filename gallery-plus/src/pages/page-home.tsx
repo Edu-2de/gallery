@@ -12,7 +12,6 @@ export default function PageHome() {
                     { id: "3", title: "album3" },
                 ]}
                 className="mb-9"
-                
             />
 
             <PhotosList
@@ -30,7 +29,7 @@ export default function PageHome() {
                     {
                         id: "2",
                         title: "titulo2",
-                        imageId: "portrait-tower.png",
+                        imageId: "portrait-tree.png",
                         albums: [
                             { id: "1", title: "album1" },
                             { id: "2", title: "album2" },
@@ -40,7 +39,7 @@ export default function PageHome() {
                     {
                         id: "3",
                         title: "titulo3",
-                        imageId: "portrait-tower.png",
+                        imageId: "square-breakfast.png",
                         albums: [
                             { id: "1", title: "album1" },
                             { id: "2", title: "album2" },

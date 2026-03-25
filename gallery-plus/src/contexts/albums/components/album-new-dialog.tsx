@@ -20,7 +20,38 @@ interface AlbumNewDialogProps extends React.ComponentProps<typeof Dialog> {
 
 export default function AlbumNewDialog({ trigger }: AlbumNewDialogProps) {
     const isLoadingPhotos = false;
-    const photos: Photo[] = [];
+    const photos: Photo[] = [
+        {
+            id: "1",
+            title: "titulo1",
+            imageId: "portrait-tower.png",
+            albums: [
+                { id: "1", title: "album1" },
+                { id: "2", title: "album2" },
+                { id: "3", title: "album3" },
+            ],
+        },
+        {
+            id: "2",
+            title: "titulo2",
+            imageId: "portrait-tree.png",
+            albums: [
+                { id: "1", title: "album1" },
+                { id: "2", title: "album2" },
+                { id: "3", title: "album3" },
+            ],
+        },
+        {
+            id: "3",
+            title: "titulo3",
+            imageId: "square-breakfast.png",
+            albums: [
+                { id: "1", title: "album1" },
+                { id: "2", title: "album2" },
+                { id: "3", title: "album3" },
+            ],
+        },
+    ];
 
     return (
         <Dialog>
