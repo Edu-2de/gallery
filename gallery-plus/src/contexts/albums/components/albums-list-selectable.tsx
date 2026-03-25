@@ -14,8 +14,26 @@ interface AlbumsListSelectable extends React.ComponentProps<"div"> {
 
 export default function AlbumsListSelectable({
     loading,
+    photo,
     albums,
 }: AlbumsListSelectable) {
+    function isChecked(albumId: string) {
+        return photo?.albums?.some((album) => album.id === albumId);
+    }
+
+    function handlePhotoOnAlbums(albumId: string) {
+        let albumsIds = [];
+        if (isChecked(albumId)) {
+            albumsIds = photo.albums
+                .filter((album) => album.id !== albumId)
+                .map((album) => album.id);
+        } else {
+            albumsIds = [...photo.albums.map((album) => album.id), albumId];
+        }
+
+        console.log(albumsIds);
+    }
+
     return (
         <ul className="flex flex-col gap-4">
             {!loading && albums.length > 0
@@ -28,7 +46,10 @@ export default function AlbumsListSelectable({
                               >
                                   {album.title}
                               </Text>
-                              <InputCheckbox />
+                              <InputCheckbox
+                                  checked={isChecked(album.id)}
+                                  onClick={() => handlePhotoOnAlbums(album.id)}
+                              />
                           </div>
                           {index !== albums.length - 1 && (
                               <Divider className="mt-4" />
@@ -37,7 +58,7 @@ export default function AlbumsListSelectable({
                   ))
                 : Array.from({ length: 5 }).map((_, index) => (
                       <li key={`albums-list=${index}`}>
-                        <Skeleton className="h-[2.5rem]"></Skeleton>
+                          <Skeleton className="h-[2.5rem]"></Skeleton>
                       </li>
                   ))}
         </ul>

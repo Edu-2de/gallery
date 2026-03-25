@@ -56,9 +56,11 @@ export default function PagePhotoDetail() {
                         Álbuns
                     </Text>
 
-                    <AlbumsListSelectable photo={photo} albums={photo.albums} />
-
-
+                    <AlbumsListSelectable
+                        photo={photo}
+                        albums={photo.albums}
+                        loading={isLoadingPhoto}
+                    />
                 </div>
             </div>
         </Container>
