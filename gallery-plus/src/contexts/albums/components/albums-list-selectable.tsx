@@ -6,7 +6,7 @@ import InputCheckbox from "../../../components/input-checkbox";
 import Divider from "../../../components/divider";
 import Skeleton from "../../../components/skeleton";
 
-interface AlbumsListSelectable extends React.ComponentProps<"div"> {
+interface AlbumsListSelectable extends React.ComponentProps<"ul"> {
     loading?: boolean;
     albums: Album[];
     photo: Photo;
