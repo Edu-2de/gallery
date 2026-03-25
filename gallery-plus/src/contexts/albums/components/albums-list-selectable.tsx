@@ -47,7 +47,7 @@ export default function AlbumsListSelectable({
                                   {album.title}
                               </Text>
                               <InputCheckbox
-                                  checked={isChecked(album.id)}
+                                  defaultChecked={isChecked(album.id)}
                                   onClick={() => handlePhotoOnAlbums(album.id)}
                               />
                           </div>
