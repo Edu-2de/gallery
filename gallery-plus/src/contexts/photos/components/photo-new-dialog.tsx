@@ -16,6 +16,7 @@ import ImagePreview from "../../../components/image-preview";
 import Text from "../../../components/text";
 import type { Album } from "../../albums/models/albums";
 import Skeleton from "../../../components/skeleton";
+import { useForm } from "react-hook-form";
 
 interface PhotoNewDialogProps extends React.ComponentProps<typeof Dialog> {
     trigger: React.ReactNode;
@@ -23,6 +24,7 @@ interface PhotoNewDialogProps extends React.ComponentProps<typeof Dialog> {
 }
 
 export default function PhotoNewDialog({ trigger }: PhotoNewDialogProps) {
+    const form = useForm();
     const isLoadingAlbum = false;
     const albums: Album[] = [
         { id: "1", title: "album1" },
@@ -46,32 +48,34 @@ export default function PhotoNewDialog({ trigger }: PhotoNewDialogProps) {
                         Voce pode selcionar arquivo PNG, JPG ou JPEG
                     </Alert>
                     <InputSingleFile
-                        form={null}
+                        form={form}
                         allowedExtensions={["png", "jpg", "jpeg"]}
                         maxFileSizeInMB={50}
                         replaceBy={<ImagePreview className="w-full h-56" />}
                     />
-                    <div className="space-y-3 ">
+                    <div className="flex flex-col gap-3 ">
                         <Text variant="label-small">Selecionar albuns</Text>
-                        {!isLoadingAlbum &&
-                            albums.length > 0 &&
-                            albums.map((album) => (
-                                <Button
-                                    key={album.id}
-                                    variant="ghost"
-                                    size="sm"
-                                    className="truncate"
-                                >
-                                    {album.title}
-                                </Button>
-                            ))}
-                        {isLoadingAlbum &&
-                            Array.from({ length: 5 }).map((_, index) => (
-                                <Skeleton
-                                    className="h-7 w-20"
-                                    key={`album-loading-${index}`}
-                                />
-                            ))}
+                        <div className="flex flex-wrap gap-3">
+                            {!isLoadingAlbum &&
+                                albums.length > 0 &&
+                                albums.map((album) => (
+                                    <Button
+                                        key={album.id}
+                                        variant="ghost"
+                                        size="sm"
+                                        className="truncate"
+                                    >
+                                        {album.title}
+                                    </Button>
+                                ))}
+                            {isLoadingAlbum &&
+                                Array.from({ length: 5 }).map((_, index) => (
+                                    <Skeleton
+                                        className="h-7 w-20"
+                                        key={`album-loading-${index}`}
+                                    />
+                                ))}
+                        </div>
                     </div>
                 </DialogBody>
                 <DialogFooter>
