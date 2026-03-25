@@ -13,6 +13,8 @@ import InputText from "../../../components/input-text";
 import Text from "../../../components/text";
 import type { Photo } from "../../photos/models/photo";
 import SelectCheckboxIllustration from "../../../assets/images/select-checkbox.svg?react";
+import Skeleton from "../../../components/skeleton";
+import ImagePreview from "../../../components/image-preview";
 
 interface AlbumNewDialogProps extends React.ComponentProps<typeof Dialog> {
     trigger: React.ReactNode;
@@ -60,8 +62,33 @@ export default function AlbumNewDialog({ trigger }: AlbumNewDialogProps) {
                 <DialogHeader>Criar álbum</DialogHeader>
                 <DialogBody className="flex flex-col gap-5">
                     <InputText placeholder="Adicione um titúlo" />
-                    <div className="space-y-3">
+                    <div className="flex flex-col gap-3">
                         <Text variant="label-small">Fotos cadastradas</Text>
+
+                        {isLoadingPhotos && (
+                            <div className="flex flex-wrap gap-2">
+                                {Array.from({ length: 4 }).map((_, index) => (
+                                    <Skeleton
+                                        key={`photo-loading-${index}`}
+                                        className="w-20 h-20 rounded"
+                                    />
+                                ))}
+                            </div>
+                        )}
+
+                        {!isLoadingPhotos && photos.length > 0 && (
+                            <div className="flex flex-wrap gap-2">
+                                {photos.map((photo) => (
+                                    <ImagePreview
+                                        key={photo.id}
+                                        src={`/images/${photo.imageId}`}
+                                        title={photo.title}
+                                        className="w-20 h-20 rounded-lg"
+                                    />
+                                ))}
+                            </div>
+                        )}
+
                         {!isLoadingPhotos && photos.length === 0 && (
                             <div
                                 className={`
