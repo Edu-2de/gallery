@@ -1,3 +1,7 @@
 {
-  "C_Cpp.errorSquiggles": "enabled"
+    "C_Cpp.errorSquiggles": "enabled",
+    "cSpell.language": "en,pt,pt-BR",
+    "cSpell.enabledFileTypes": {
+        "json": true
+    }
 }
