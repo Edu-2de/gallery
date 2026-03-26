@@ -18,17 +18,25 @@ interface PhotoImageSelectableProps
         VariantProps<typeof photoImageSelectableVariants>,
         React.ComponentProps<typeof ImagePreview> {
     selected?: boolean;
+    onSelectImage?: (selected: boolean) => void;
 }
 
 export default function PhotoImageSelectable({
     selected,
+    onSelectImage,
     className,
     ...props
 }: PhotoImageSelectableProps) {
     const [isSelected, setIsSelected] = React.useState(selected);
 
+    function handleSelect() {
+        const newValue = !isSelected;
+        setIsSelected(newValue);
+        onSelectImage?.(newValue);
+    }
+
     return (
-        <div
+        <label
             className={photoImageSelectableVariants({
                 className,
                 select: isSelected,
@@ -37,9 +45,10 @@ export default function PhotoImageSelectable({
             <InputCheckbox
                 size="sm"
                 defaultChecked={isSelected}
-                onClick={() => setIsSelected(!isSelected)}
+                onClick={handleSelect}
+                className="absolute top-1 left-1"
             />
             <ImagePreview {...props} />
-        </div>
+        </label>
     );
 }
