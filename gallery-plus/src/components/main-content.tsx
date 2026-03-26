@@ -1,5 +1,5 @@
 import type React from "react";
-import cx from "classNames";
+import cx from "classnames";
 
 interface MainContentProps extends React.ComponentProps<"main"> {}
 
