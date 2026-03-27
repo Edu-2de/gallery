@@ -6,18 +6,16 @@ import PhotoNavigator from "../contexts/photos/components/photo-navigator";
 import ImagePreview from "../components/image-preview";
 import Button from "../components/button";
 import AlbumsListSelectable from "../contexts/albums/components/albums-list-selectable";
+import useAlbums from "../contexts/albums/hooks/use-albums";
 
 export default function PagePhotoDetail() {
     const isLoadingPhoto = false;
+    const {albums, isLoadingAlbums} = useAlbums()
     const photo = {
         id: "1",
         title: "titulo1",
         imageId: "portrait-tower.png",
-        albums: [
-            { id: "1", title: "album1" },
-            { id: "2", title: "album2" },
-            { id: "3", title: "album3" },
-        ],
+        albums: albums,
     } as Photo;
     return (
         <Container>
@@ -59,7 +57,7 @@ export default function PagePhotoDetail() {
                     <AlbumsListSelectable
                         photo={photo}
                         albums={photo.albums}
-                        loading={isLoadingPhoto}
+                        loading={isLoadingAlbums}
                     />
                 </div>
             </div>
