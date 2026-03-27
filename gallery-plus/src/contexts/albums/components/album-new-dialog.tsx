@@ -1,4 +1,6 @@
 import type React from "react";
+import SelectCheckboxIllustration from "../../../assets/images/select-checkbox.svg?react";
+import Button from "../../../components/button";
 import {
     Dialog,
     DialogBody,
@@ -8,52 +10,18 @@ import {
     DialogHeader,
     DialogTrigger,
 } from "../../../components/dialog";
-import Button from "../../../components/button";
 import InputText from "../../../components/input-text";
-import Text from "../../../components/text";
-import type { Photo } from "../../photos/models/photo";
-import SelectCheckboxIllustration from "../../../assets/images/select-checkbox.svg?react";
 import Skeleton from "../../../components/skeleton";
+import Text from "../../../components/text";
 import PhotoImageSelectable from "../../photos/components/photo-image-selectable";
+import usePhotos from "../../photos/hooks/use-photos";
 
 interface AlbumNewDialogProps extends React.ComponentProps<typeof Dialog> {
     trigger: React.ReactNode;
 }
 
 export default function AlbumNewDialog({ trigger }: AlbumNewDialogProps) {
-    const isLoadingPhotos = false;
-    const photos: Photo[] = [
-        {
-            id: "1",
-            title: "titulo1",
-            imageId: "portrait-tower.png",
-            albums: [
-                { id: "1", title: "album1" },
-                { id: "2", title: "album2" },
-                { id: "3", title: "album3" },
-            ],
-        },
-        {
-            id: "2",
-            title: "titulo2",
-            imageId: "portrait-tree.png",
-            albums: [
-                { id: "1", title: "album1" },
-                { id: "2", title: "album2" },
-                { id: "3", title: "album3" },
-            ],
-        },
-        {
-            id: "3",
-            title: "titulo3",
-            imageId: "square-breakfast.png",
-            albums: [
-                { id: "1", title: "album1" },
-                { id: "2", title: "album2" },
-                { id: "3", title: "album3" },
-            ],
-        },
-    ];
+    const { photos, isLoadingPhotos } = usePhotos();
 
     function handleTogglePhoto(selected: boolean, photoId: string) {
         console.log(selected, photoId);
@@ -65,7 +33,7 @@ export default function AlbumNewDialog({ trigger }: AlbumNewDialogProps) {
             <DialogContent>
                 <DialogHeader>Criar álbum</DialogHeader>
                 <DialogBody className="flex flex-col gap-5">
-                    <InputText placeholder="Adicione um titúlo" />
+                    <InputText placeholder="Adicione um título" />
                     <div className="flex flex-col gap-3">
                         <Text variant="label-small">Fotos cadastradas</Text>
 
@@ -85,7 +53,7 @@ export default function AlbumNewDialog({ trigger }: AlbumNewDialogProps) {
                                 {photos.map((photo) => (
                                     <PhotoImageSelectable
                                         key={photo.id}
-                                        src={`/images/${photo.imageId}`}
+                                        src={`${import.meta.env.VITE_IMAGES_URL}/${photo.imageId}`}
                                         title={photo.title}
                                         imageClassName="w-20 h-20 rounded-lg"
                                         onSelectImage={(selected) =>
