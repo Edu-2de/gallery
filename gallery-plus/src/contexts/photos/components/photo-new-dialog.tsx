@@ -25,8 +25,7 @@ interface PhotoNewDialogProps extends React.ComponentProps<typeof Dialog> {
 
 export default function PhotoNewDialog({ trigger }: PhotoNewDialogProps) {
     const form = useForm();
-    const { albums } = useAlbums();
-    const isLoadingAlbum = false;
+    const { albums, isLoadingAlbums } = useAlbums();
 
     return (
         <Dialog>
@@ -52,7 +51,7 @@ export default function PhotoNewDialog({ trigger }: PhotoNewDialogProps) {
                     <div className="flex flex-col gap-3 ">
                         <Text variant="label-small">Selecionar albuns</Text>
                         <div className="flex flex-wrap gap-3">
-                            {!isLoadingAlbum &&
+                            {!isLoadingAlbums &&
                                 albums.length > 0 &&
                                 albums.map((album) => (
                                     <Button
@@ -64,7 +63,7 @@ export default function PhotoNewDialog({ trigger }: PhotoNewDialogProps) {
                                         {album.title}
                                     </Button>
                                 ))}
-                            {isLoadingAlbum &&
+                            {isLoadingAlbums &&
                                 Array.from({ length: 5 }).map((_, index) => (
                                     <Skeleton
                                         className="h-7 w-20"
