@@ -14,9 +14,9 @@ import Alert from "../../../components/alert";
 import InputSingleFile from "../../../components/input-single-file";
 import ImagePreview from "../../../components/image-preview";
 import Text from "../../../components/text";
-import type { Album } from "../../albums/models/albums";
 import Skeleton from "../../../components/skeleton";
 import { useForm } from "react-hook-form";
+import useAlbums from "../../albums/hooks/use-albums";
 
 interface PhotoNewDialogProps extends React.ComponentProps<typeof Dialog> {
     trigger: React.ReactNode;
@@ -25,12 +25,8 @@ interface PhotoNewDialogProps extends React.ComponentProps<typeof Dialog> {
 
 export default function PhotoNewDialog({ trigger }: PhotoNewDialogProps) {
     const form = useForm();
+    const { albums } = useAlbums();
     const isLoadingAlbum = false;
-    const albums: Album[] = [
-        { id: "1", title: "album1" },
-        { id: "2", title: "album2" },
-        { id: "3", title: "album3" },
-    ];
 
     return (
         <Dialog>
