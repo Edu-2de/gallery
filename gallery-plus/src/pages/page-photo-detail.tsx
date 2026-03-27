@@ -1,22 +1,24 @@
-import Container from "../components/container";
-import Text from "../components/text";
-import type { Photo } from "../contexts/photos/models/photo";
-import Skeleton from "../components/skeleton";
-import PhotoNavigator from "../contexts/photos/components/photo-navigator";
-import ImagePreview from "../components/image-preview";
+import { useParams } from "react-router";
 import Button from "../components/button";
+import Container from "../components/container";
+import ImagePreview from "../components/image-preview";
+import Skeleton from "../components/skeleton";
+import Text from "../components/text";
 import AlbumsListSelectable from "../contexts/albums/components/albums-list-selectable";
 import useAlbums from "../contexts/albums/hooks/use-albums";
+import PhotoNavigator from "../contexts/photos/components/photo-navigator";
+import usePhoto from "../contexts/photos/hooks/use-photo";
+import type { Photo } from "../contexts/photos/models/photo";
 
 export default function PagePhotoDetail() {
-    const isLoadingPhoto = false;
-    const {albums, isLoadingAlbums} = useAlbums()
-    const photo = {
-        id: "1",
-        title: "titulo1",
-        imageId: "portrait-tower.png",
-        albums: albums,
-    } as Photo;
+    const { id } = useParams();
+    const { photo, isLoadingPhoto } = usePhoto(id);
+    const { albums, isLoadingAlbums } = useAlbums();
+
+    if (!isLoadingAlbums && !photo) {
+        return <Text className="text-accent-red">Foto nao encontrada</Text>;
+    }
+
     return (
         <Container>
             <header className="flex justify-between items-center gap-8 mb-8">
@@ -36,7 +38,7 @@ export default function PagePhotoDetail() {
                     {!isLoadingPhoto ? (
                         <ImagePreview
                             src={`/images/${photo?.imageId}`}
-                            title={photo.title}
+                            title={photo?.title}
                             imageClassName="h-[21rem]"
                         />
                     ) : (
@@ -55,8 +57,8 @@ export default function PagePhotoDetail() {
                     </Text>
 
                     <AlbumsListSelectable
-                        photo={photo}
-                        albums={photo.albums}
+                        photo={photo as Photo}
+                        albums={albums}
                         loading={isLoadingAlbums}
                     />
                 </div>
