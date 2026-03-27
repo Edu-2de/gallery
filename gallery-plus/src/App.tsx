@@ -4,27 +4,30 @@ import PageComponents from "./pages/page-components";
 import LayoutMain from "./pages/layout-main";
 import PageHome from "./pages/page-home";
 import PagePhotoDetail from "./pages/page-photo-detail";
+import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
 
 const queryClient = new QueryClient();
 
 export default function App() {
     return (
         <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-                <Routes>
-                    <Route element={<LayoutMain />}>
-                        <Route index element={<PageHome />} />
-                        <Route
-                            path="/componentes"
-                            element={<PageComponents />}
-                        />
-                        <Route
-                            path="/fotos/:id"
-                            element={<PagePhotoDetail />}
-                        />
-                    </Route>
-                </Routes>
-            </BrowserRouter>
+            <NuqsAdapter>
+                <BrowserRouter>
+                    <Routes>
+                        <Route element={<LayoutMain />}>
+                            <Route index element={<PageHome />} />
+                            <Route
+                                path="/componentes"
+                                element={<PageComponents />}
+                            />
+                            <Route
+                                path="/fotos/:id"
+                                element={<PagePhotoDetail />}
+                            />
+                        </Route>
+                    </Routes>
+                </BrowserRouter>
+            </NuqsAdapter>
         </QueryClientProvider>
     );
 }
