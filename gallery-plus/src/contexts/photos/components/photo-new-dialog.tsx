@@ -31,6 +31,9 @@ export default function PhotoNewDialog({ trigger }: PhotoNewDialogProps) {
     });
     const { albums, isLoadingAlbums } = useAlbums();
 
+    const file = form.watch("file");
+    const fileSrc = file?.[0] ? URL.createObjectURL(file[0]) : undefined;
+
     function handleSubmit(payload: PhotoNewFormSchema) {
         console.log(payload);
     }
@@ -54,10 +57,17 @@ export default function PhotoNewDialog({ trigger }: PhotoNewDialogProps) {
                             Voce pode selecionar arquivo PNG, JPG ou JPEG
                         </Alert>
                         <InputSingleFile
+                            error={form.formState.errors.file?.message}
+                            {...form.register("file")}
                             form={form}
                             allowedExtensions={["png", "jpg", "jpeg"]}
                             maxFileSizeInMB={50}
-                            replaceBy={<ImagePreview className="w-full h-56" />}
+                            replaceBy={
+                                <ImagePreview
+                                    src={fileSrc}
+                                    className="w-full h-56"
+                                />
+                            }
                         />
                         <div className="flex flex-col gap-3 ">
                             <Text variant="label-small">Selecionar álbuns</Text>
