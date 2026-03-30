@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogClose } from "@radix-ui/react-dialog";
-import type React from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import Alert from "../../../components/alert";
 import Button from "../../../components/button";
@@ -26,6 +26,8 @@ interface PhotoNewDialogProps extends React.ComponentProps<typeof Dialog> {
 }
 
 export default function PhotoNewDialog({ trigger }: PhotoNewDialogProps) {
+    const [modalOpen, setModalOpen] = React.useState(false);
+
     const form = useForm<PhotoNewFormSchema>({
         resolver: zodResolver(photoNewFormSchema),
     });
@@ -38,8 +40,14 @@ export default function PhotoNewDialog({ trigger }: PhotoNewDialogProps) {
         console.log(payload);
     }
 
+    React.useEffect(() => {
+        if (!modalOpen) {
+            form.reset();
+        }
+    }, [modalOpen, form]);
+
     return (
-        <Dialog>
+        <Dialog open={modalOpen} onOpenChange={setModalOpen}>
             <DialogTrigger asChild>{trigger}</DialogTrigger>
             <DialogContent>
                 <form onSubmit={form.handleSubmit(handleSubmit)}>
