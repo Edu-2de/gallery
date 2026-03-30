@@ -37,7 +37,7 @@ export default function usePhoto(id?: string) {
             );
 
             if (payload.albumsIds && payload.albumsIds.length > 0) {
-                await api.put(`photo/${photo.id}/albums`, {
+                await api.put(`photos/${photo.id}/albums`, {
                     albumsIds: payload.albumsIds,
                 });
             }
