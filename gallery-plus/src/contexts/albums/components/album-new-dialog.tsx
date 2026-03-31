@@ -30,6 +30,12 @@ export default function AlbumNewDialog({ trigger }: AlbumNewDialogProps) {
     });
     const { photos, isLoadingPhotos } = usePhotos();
 
+    React.useEffect(() => {
+        if (!modalOpen) {
+            form.reset();
+        }
+    }, [modalOpen, form]);
+
     function handleTogglePhoto(selected: boolean, photoId: string) {
         console.log(selected, photoId);
     }
