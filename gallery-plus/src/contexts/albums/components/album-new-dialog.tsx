@@ -17,6 +17,7 @@ import Skeleton from "../../../components/skeleton";
 import Text from "../../../components/text";
 import PhotoImageSelectable from "../../photos/components/photo-image-selectable";
 import usePhotos from "../../photos/hooks/use-photos";
+import useAlbum from "../hooks/use-album";
 import { albumNewFormSchema, type AlbumNewFormSchema } from "../schemas";
 
 interface AlbumNewDialogProps extends React.ComponentProps<typeof Dialog> {
@@ -29,6 +30,9 @@ export default function AlbumNewDialog({ trigger }: AlbumNewDialogProps) {
         resolver: zodResolver(albumNewFormSchema),
     });
     const { photos, isLoadingPhotos } = usePhotos();
+    const { createAlbum } = useAlbum();
+
+    const [isCreatingAlbum, setIsCreatingAlbum] = React.useTransition();
 
     React.useEffect(() => {
         if (!modalOpen) {
@@ -50,7 +54,10 @@ export default function AlbumNewDialog({ trigger }: AlbumNewDialogProps) {
     }
 
     function handleSubmit(payload: AlbumNewFormSchema) {
-        console.log(payload);
+        setIsCreatingAlbum(async () => {
+            await createAlbum(payload);
+            setModalOpen(false);
+        });
     }
 
     return (
@@ -120,11 +127,21 @@ export default function AlbumNewDialog({ trigger }: AlbumNewDialogProps) {
                     </DialogBody>
                     <DialogFooter>
                         <DialogClose>
-                            <Button type="button" variant="secondary">
+                            <Button
+                                type="button"
+                                disabled={isCreatingAlbum}
+                                variant="secondary"
+                            >
                                 Cancelar
                             </Button>
                         </DialogClose>
-                        <Button type="submit">Criar</Button>
+                        <Button
+                            disabled={isCreatingAlbum}
+                            handling={isCreatingAlbum}
+                            type="submit"
+                        >
+                            {isCreatingAlbum ? "Criando..." : "Criar"}
+                        </Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
