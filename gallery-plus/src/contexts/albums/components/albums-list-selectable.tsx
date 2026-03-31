@@ -43,7 +43,7 @@ export default function AlbumsListSelectable({
 
     return (
         <ul className="flex flex-col gap-4">
-            {!loading && albums.length > 0
+            {!loading && photo && albums.length > 0
                 ? albums.map((album, index) => (
                       <li key={album.id}>
                           <div className="flex items-center justify-between gap-1">
