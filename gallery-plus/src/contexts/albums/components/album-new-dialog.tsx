@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import type React from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import SelectCheckboxIllustration from "../../../assets/images/select-checkbox.svg?react";
 import Button from "../../../components/button";
@@ -24,6 +24,7 @@ interface AlbumNewDialogProps extends React.ComponentProps<typeof Dialog> {
 }
 
 export default function AlbumNewDialog({ trigger }: AlbumNewDialogProps) {
+    const [modalOpen, setModalOpen] = React.useState(false);
     const form = useForm<AlbumNewFormSchema>({
         resolver: zodResolver(albumNewFormSchema),
     });
@@ -38,7 +39,7 @@ export default function AlbumNewDialog({ trigger }: AlbumNewDialogProps) {
     }
 
     return (
-        <Dialog>
+        <Dialog open={modalOpen} onOpenChange={setModalOpen}>
             <DialogTrigger asChild>{trigger}</DialogTrigger>
             <DialogContent>
                 <form onSubmit={form.handleSubmit(handleSubmit)}>
