@@ -56,8 +56,9 @@ export default function usePhoto(id?: string) {
     async function deletePhoto(photoId: string) {
         try {
             await api.delete(`/photos/${photoId}`);
-            navigate("/");
             toast.success("Foto deletada com sucesso");
+
+            navigate("/");
         } catch (error) {
             toast.error("Erro ao deletar foto");
             throw error;
